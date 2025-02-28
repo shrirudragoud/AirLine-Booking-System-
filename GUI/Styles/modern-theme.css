@@ -1,0 +1,228 @@
+/* Modern Theme Override */
+:root {
+    /* Updated Color Scheme */
+    --primary-color: #2563eb;
+    --primary-light: #60a5fa;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #f59e0b;
+    --accent-color: #ec4899;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --background-color: #f8fafc;
+    --card-background: #ffffff;
+    --text-color: #1e293b;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+    
+    /* Gradients */
+    --primary-gradient: linear-gradient(135deg, #2563eb, #60a5fa);
+    --accent-gradient: linear-gradient(135deg, #ec4899, #f472b6);
+    --success-gradient: linear-gradient(135deg, #10b981, #34d399);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(30, 41, 59, 0.1);
+    --shadow-lg: 0 10px 15px rgba(30, 41, 59, 0.1);
+}
+
+/* Body Styles */
+body {
+    background-image: linear-gradient(135deg, var(--background-color) 0%, #e2e8f0 100%);
+}
+
+/* Card Enhancements */
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow-md);
+}
+
+/* Enhanced Header */
+.main-header {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Navigation Styles */
+.nav-link {
+    position: relative;
+    font-weight: 500;
+}
+
+.nav-link:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-gradient);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover:after,
+.nav-link.active:after {
+    width: 100%;
+}
+
+/* Enhanced Buttons */
+.btn-primary {
+    background: var(--primary-gradient);
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Flight Cards */
+.flight-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.flight-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+}
+
+.flight-card .price-tag {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 8px 8px;
+    position: absolute;
+    top: 0;
+    right: 2rem;
+}
+
+/* Form Enhancements */
+.form-control {
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Search Section */
+.search-section {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.search-section .form-control {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Route Display */
+.route-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.route-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border-color);
+    position: relative;
+}
+
+.route-line:before,
+.route-line:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.route-line:before { left: 0; }
+.route-line:after { right: 0; }
+
+/* Price Display */
+.price-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+}
+
+.price-display .currency {
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+/* Flight Status */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-available {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.status-limited {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.status-full {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+/* Animations */
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-in {
+    animation: slideIn 0.5s ease forwards;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .search-section {
+        padding: 1rem;
+    }
+
+    .route-info {
+        flex-direction: column;
+    }
+
+    .route-line {
+        width: 2px;
+        height: 40px;
+    }
+}
