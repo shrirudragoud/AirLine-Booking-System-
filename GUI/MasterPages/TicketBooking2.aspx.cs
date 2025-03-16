@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 public partial class TicketBooking2 : System.Web.UI.Page
 {
@@ -241,6 +242,17 @@ public partial class TicketBooking2 : System.Web.UI.Page
     {
         BookingStatus.Text = message;
         BookingStatus.CssClass = "booking-status success";
+        
+        // Add client-side notification - wrapping in try-catch for safety
+        try
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "ShowNotification",
+                string.Format("showNotification('{0}');", message.Replace("'", "\\'")), true);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine("Error registering notification script: " + ex.Message);
+        }
     }
 
     private void ShowError(string message)

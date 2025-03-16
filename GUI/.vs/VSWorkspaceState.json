@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\MasterPages",
+    "\\Scripts"
   ],
+  "SelectedNode": "\\MasterPages\\login.aspx.designer.cs",
   "PreviewInSolutionExplorer": false
 }

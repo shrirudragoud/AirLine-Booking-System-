@@ -49,6 +49,7 @@
         </div>
     </div>
 
+
     <!-- Featured Destinations -->
     <div class="content-section">
         <h2 class="section-title">Popular Destinations</h2>
@@ -121,8 +122,11 @@
     <style>
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url('../Images/hero-bg.jpg') no-repeat center center;
+            background-color: var(--primary-dark);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('<%= Page.ResolveClientUrl("~/Images/backgrounds/hero-bg.jpg") %>');
+            background-repeat: no-repeat;
+            background-position: center center;
             background-size: cover;
             padding: 100px 20px;
             color: white;
@@ -343,4 +347,5 @@
             }
         }
     </style>
+
 </asp:Content>

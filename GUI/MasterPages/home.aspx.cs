@@ -1,3 +1,4 @@
+
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -131,9 +132,41 @@ public partial class home : System.Web.UI.Page
 
     protected string GetDestinationImage(object dataItem)
     {
-        DataRowView row = (DataRowView)dataItem;
-        string destination = row["Destination"].ToString().ToLower();
-        return string.Format("../Images/destinations/{0}.jpg", destination);
+        try
+        {
+            DataRowView row = (DataRowView)dataItem;
+            string destination = row["Destination"].ToString().ToLower();
+            
+            // Try SVG first
+            string svgPath = string.Format("~/Images/destinations/{0}.svg", destination);
+            string physicalSvgPath = Server.MapPath(svgPath);
+            if (System.IO.File.Exists(physicalSvgPath))
+            {
+                return ResolveUrl(svgPath);
+            }
+
+            // Then try JPG
+            string jpgPath = string.Format("~/Images/destinations/{0}.jpg", destination);
+            string physicalJpgPath = Server.MapPath(jpgPath);
+            if (System.IO.File.Exists(physicalJpgPath))
+            {
+                return ResolveUrl(jpgPath);
+            }
+
+            // Fallback to default image if neither exists
+            return ResolveUrl("~/Images/destinations/default.jpg");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine("Error loading destination image: " + ex.Message);
+            string defaultPath = "~/Images/destinations/default.jpg";
+            if (!System.IO.File.Exists(Server.MapPath(defaultPath)))
+            {
+                System.Diagnostics.Debug.WriteLine("Warning: Default image not found at " + defaultPath);
+                return "";
+            }
+            return ResolveUrl(defaultPath);
+        }
     }
 
     protected string FormatTime(object time)

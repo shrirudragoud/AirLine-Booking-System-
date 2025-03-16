@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HP\\airline test\\Airline-Reservation-System-master\\GUI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{698EEFE9-147A-A0A7-1C3E-91DF27432647}|C:\\Users\\HP\\airline test\\Airline-Reservation-System-master\\GUI|c:\\users\\hp\\airline test\\airline-reservation-system-master\\gui\\masterpages\\ticketbooking2.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{698EEFE9-147A-A0A7-1C3E-91DF27432647}|C:\\Users\\HP\\airline test\\Airline-Reservation-System-master\\GUI|solutionrelative:masterpages\\ticketbooking2.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TicketBooking2.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\airline test\\Airline-Reservation-System-master\\GUI\\MasterPages\\TicketBooking2.aspx.cs",
+              "RelativeDocumentMoniker": "MasterPages\\TicketBooking2.aspx.cs",
+              "ToolTip": "C:\\Users\\HP\\airline test\\Airline-Reservation-System-master\\GUI\\MasterPages\\TicketBooking2.aspx.cs",
+              "RelativeToolTip": "MasterPages\\TicketBooking2.aspx.cs",
+              "ViewState": "AgIAAAABAAAAAAAAAAAiwOQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T20:31:47.888Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
