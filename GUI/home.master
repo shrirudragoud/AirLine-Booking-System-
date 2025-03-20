@@ -48,12 +48,21 @@
                             </asp:HyperLink>
                         </li>
                         <li class="nav-item">
-                            <asp:HyperLink ID="SeatsLink" runat="server" 
+                            <asp:HyperLink ID="SeatsLink" runat="server"
                                 NavigateUrl="MasterPages/Available seats.aspx" CssClass="nav-link">
                                 <span class="material-symbols-outlined">chair</span>
                                 Seats
                             </asp:HyperLink>
                         </li>
+                        <% if (Session["Username"] != null) { %>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="BookingsLink" runat="server"
+                                NavigateUrl="MasterPages/MyBookings.aspx" CssClass="nav-link">
+                                <span class="material-symbols-outlined">confirmation_number</span>
+                                My Bookings
+                            </asp:HyperLink>
+                        </li>
+                        <% } %>
                         <li class="nav-item">
                             <asp:HyperLink ID="ContactLink" runat="server" 
                                 NavigateUrl="MasterPages/ContactUs.aspx" CssClass="nav-link">

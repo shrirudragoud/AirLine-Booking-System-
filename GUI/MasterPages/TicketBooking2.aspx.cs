@@ -5,6 +5,8 @@ using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 public partial class TicketBooking2 : System.Web.UI.Page
 {
@@ -43,7 +45,6 @@ public partial class TicketBooking2 : System.Web.UI.Page
                 using (SqlCommand cmd = new SqlCommand(@"
                     SELECT FlightID, FlightNumber + ' (' + Origin + ' → ' + Destination + ')' as FlightDetails
                     FROM Flights
-                    WHERE DepartureTime > GETDATE()
                     ORDER BY DepartureTime", conn))
                 {
                     DropDownList1.Items.Clear();
@@ -204,36 +205,56 @@ public partial class TicketBooking2 : System.Web.UI.Page
     {
         if (Page.IsValid)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["conn"].ConnectionString))
+            try
             {
-                try
-                {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand(@"
-                        INSERT INTO Bookings (PassengerName, FlightId, FlightName, FromStation, ToStation, 
-                                            Category, TravelDateTime, Username)
-                        VALUES (@PassengerName, @FlightId, @FlightName, @FromStation, @ToStation, 
-                                @Category, @TravelDateTime, @Username)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@PassengerName", TextBox1.Text.Trim());
-                        cmd.Parameters.AddWithValue("@FlightId", DropDownList1.SelectedValue);
-                        cmd.Parameters.AddWithValue("@FlightName", DropDownList2.SelectedValue);
-                        cmd.Parameters.AddWithValue("@FromStation", DropDownList3.SelectedValue);
-                        cmd.Parameters.AddWithValue("@ToStation", DropDownList4.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Category", DropDownList5.SelectedValue);
-                        cmd.Parameters.AddWithValue("@TravelDateTime", DropDownList6.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Username", Session["Username"].ToString());
+                string jsonPath = Server.MapPath("~/App_Data/bookings.json");
+                BookingsData bookingsData;
+                var serializer = new JavaScriptSerializer();
 
-                        cmd.ExecuteNonQuery();
-
-                        ShowSuccess("Ticket booked successfully!");
-                        ClearForm();
-                    }
-                }
-                catch (Exception ex)
+                // Read existing bookings
+                if (System.IO.File.Exists(jsonPath))
                 {
-                    ShowError("Error booking ticket: " + ex.Message);
+                    string jsonContent = System.IO.File.ReadAllText(jsonPath);
+                    bookingsData = serializer.Deserialize<BookingsData>(jsonContent);
                 }
+                else
+                {
+                    bookingsData = new BookingsData { bookings = new List<Booking>() };
+                }
+
+                // Generate new booking ID
+                string newBookingId = "BK" + (bookingsData.bookings.Count + 1).ToString("D3");
+
+                // Create new booking
+                var booking = new Booking
+                {
+                    bookingId = newBookingId,
+                    passengerName = TextBox1.Text.Trim(),
+                    flightNumber = DropDownList1.SelectedValue,
+                    from = DropDownList3.SelectedValue,
+                    to = DropDownList4.SelectedValue,
+                    date = DropDownList6.SelectedValue,
+                    @class = DropDownList5.SelectedValue,
+                    seatNumber = "Auto",  // This could be improved to actually select a seat
+                    status = "Confirmed"
+                };
+
+                // Add to bookings list
+                bookingsData.bookings.Add(booking);
+
+                // Save back to file
+                string updatedJson = serializer.Serialize(bookingsData);
+                System.IO.File.WriteAllText(jsonPath, updatedJson);
+
+                ShowSuccess("Ticket booked successfully!");
+                ClearForm();
+
+                // Redirect to view the ticket
+                Response.Redirect(string.Format("ViewTicket.aspx?bookingId={0}", newBookingId));
+            }
+            catch (Exception ex)
+            {
+                ShowError("Error booking ticket: " + ex.Message);
             }
         }
     }

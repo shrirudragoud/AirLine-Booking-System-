@@ -78,10 +78,9 @@ public partial class home : System.Web.UI.Page
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(@"
-                    SELECT TOP 4 FlightID, FlightNumber, Origin, Destination, 
+                    SELECT TOP 4 FlightID, FlightNumber, Origin, Destination,
                            DepartureTime, ArrivalTime, BasePrice, FlightName
-                    FROM Flights 
-                    WHERE DepartureTime > GETDATE()
+                    FROM Flights
                     ORDER BY BasePrice ASC", conn))
                 {
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -110,7 +109,6 @@ public partial class home : System.Web.UI.Page
                 using (SqlCommand cmd = new SqlCommand(@"
                     SELECT DISTINCT TOP 6 Destination, MIN(BasePrice) as BasePrice
                     FROM Flights
-                    WHERE DepartureTime > GETDATE()
                     GROUP BY Destination
                     ORDER BY MIN(BasePrice)", conn))
                 {

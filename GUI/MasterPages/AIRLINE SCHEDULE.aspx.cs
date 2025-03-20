@@ -46,9 +46,8 @@ public partial class AIRLINE_SCHEDULE : System.Web.UI.Page
                 
                 // Load Origins
                 using (SqlCommand cmd = new SqlCommand(@"
-                    SELECT DISTINCT Origin 
-                    FROM Flights 
-                    WHERE DepartureTime > GETDATE()
+                    SELECT DISTINCT Origin
+                    FROM Flights
                     ORDER BY Origin", conn))
                 {
                     FromCity.Items.Clear();
@@ -67,9 +66,8 @@ public partial class AIRLINE_SCHEDULE : System.Web.UI.Page
 
                 // Load Destinations
                 using (SqlCommand cmd = new SqlCommand(@"
-                    SELECT DISTINCT Destination 
-                    FROM Flights 
-                    WHERE DepartureTime > GETDATE()
+                    SELECT DISTINCT Destination
+                    FROM Flights
                     ORDER BY Destination", conn))
                 {
                     ToCity.Items.Clear();
@@ -118,7 +116,7 @@ public partial class AIRLINE_SCHEDULE : System.Web.UI.Page
                         f.BasePrice,
                         (SELECT COUNT(*) FROM Seats s WHERE s.FlightID = f.FlightID AND s.IsAvailable = 1) as AvailableSeats
                     FROM Flights f
-                    WHERE DepartureTime > GETDATE()";
+                    WHERE 1=1";
 
                 // Apply filters
                 if (!string.IsNullOrEmpty(FromCity.SelectedValue))
