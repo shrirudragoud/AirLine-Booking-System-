@@ -1,6 +1,10 @@
 # Airline Reservation System
 
-A web-based airline reservation system built with ASP.NET that allows users to book flights, manage reservations, and generate reports.
+It is a web-based implementation of ASP.NET with C# and SQL Server that allows users to book flights, manage reservations, and generate reports.
+
+## Development Environment
+- Microsoft Visual Studio 2015
+- SQL Server Management Studio 2012
 
 ## Features
 

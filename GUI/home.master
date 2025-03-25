@@ -1,0 +1,181 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="home.master.cs" Inherits="home" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>AirBook - Modern Air Travel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Simple relative paths for CSS -->
+    <link href="Styles/main.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/modern-theme.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="<%= Session["Username"] != null ? "logged-in" : "" %>">
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="header-container">
+                <a href="MasterPages/home.aspx" class="logo">
+                    <span class="material-symbols-outlined">flight</span>
+                    <span class="logo-text">AirBook</span>
+                </a>
+
+                <button class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+
+                <nav class="main-nav">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <asp:HyperLink ID="HomeLink" runat="server" 
+                                NavigateUrl="MasterPages/home.aspx" CssClass="nav-link">
+                                <span class="material-symbols-outlined">home</span>
+                                Home
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="FlightsLink" runat="server" 
+                                NavigateUrl="MasterPages/AIRLINE SCHEDULE.aspx" CssClass="nav-link">
+                                <span class="material-symbols-outlined">schedule</span>
+                                Flights
+                            </asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="SeatsLink" runat="server"
+                                NavigateUrl="MasterPages/Available seats.aspx" CssClass="nav-link">
+                                <span class="material-symbols-outlined">chair</span>
+                                Seats
+                            </asp:HyperLink>
+                        </li>
+                        <% if (Session["Username"] != null) { %>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="BookingsLink" runat="server"
+                                NavigateUrl="MasterPages/MyBookings.aspx" CssClass="nav-link">
+                                <span class="material-symbols-outlined">confirmation_number</span>
+                                My Bookings
+                            </asp:HyperLink>
+                        </li>
+                        <% } %>
+                        <li class="nav-item">
+                            <asp:HyperLink ID="ContactLink" runat="server" 
+                                NavigateUrl="MasterPages/ContactUs.aspx" CssClass="nav-link">
+                                <span class="material-symbols-outlined">contact_support</span>
+                                Contact
+                            </asp:HyperLink>
+                        </li>
+                    </ul>
+
+                    <div class="user-menu">
+                        <% if (Session["Username"] != null) { %>
+                        <div class="user-info">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            <span class="username"><%= Session["Username"] %></span>
+                        </div>
+                        <asp:LinkButton ID="LogoutBtn" runat="server" OnClick="LogoutBtn_Click" 
+                            CssClass="btn btn-outline-primary">
+                            <span class="material-symbols-outlined">logout</span>
+                            Logout
+                        </asp:LinkButton>
+                        <% } else { %>
+                        <a href="MasterPages/login.aspx" class="btn btn-primary login-btn">
+                            <span class="material-symbols-outlined">login</span>
+                            Login
+                        </a>
+                        <% } %>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+
+        <!-- Enhanced Footer -->
+        <footer class="footer">
+            <div class="footer-content container">
+                <div class="footer-sections">
+                    <div class="footer-section">
+                        <h3>About AirBook</h3>
+                        <p>Your trusted partner for hassle-free air travel booking. Discover the world with comfort and convenience.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <span class="material-symbols-outlined">public</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <span class="material-symbols-outlined">mail</span>
+                            </a>
+                            <a href="#" class="social-link">
+                                <span class="material-symbols-outlined">share</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="MasterPages/home.aspx">Home</a></li>
+                            <li><a href="MasterPages/AIRLINE SCHEDULE.aspx">Flight Schedule</a></li>
+                            <li><a href="MasterPages/Available seats.aspx">Check Seats</a></li>
+                            <li><a href="MasterPages/ContactUs.aspx">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <ul class="contact-info">
+                            <li>
+                                <span class="material-symbols-outlined">location_on</span>
+                                Sangli , Maharastra , India.
+                            </li>
+                            <li>
+                                <span class="material-symbols-outlined">phone</span>
+                                +91 8700546080
+                            </li>
+                            <li>
+                                <span class="material-symbols-outlined">mail</span>
+                                info@airbook.com
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; <%= DateTime.Now.Year %> AirBook. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </form>
+
+    <!-- Popup Notification -->
+    <div id="notification-popup" class="notification-popup">
+        <div class="notification-content">
+            <span class="material-symbols-outlined notification-icon">check_circle</span>
+            <p id="notification-message">Booking Completed Successfully!</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function toggleMobileMenu() {
+            const nav = document.querySelector('.main-nav');
+            nav.classList.toggle('active');
+        }
+
+        function showNotification(message) {
+            const popup = document.getElementById('notification-popup');
+            const messageEl = document.getElementById('notification-message');
+            messageEl.textContent = message || 'Booking Completed Successfully!';
+            popup.classList.add('show');
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

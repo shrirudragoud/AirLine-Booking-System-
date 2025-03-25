@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Test Page</title>
+    <link href="main.css" rel="stylesheet" type="text/css" />
+    <link href="modern-theme.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        .test-section {
+            margin: 20px;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .color-sample {
+            width: 100px;
+            height: 40px;
+            margin: 5px;
+            display: inline-block;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSS Style Test</h1>
+
+        <!-- Color Scheme -->
+        <div class="test-section">
+            <h2>Color Scheme</h2>
+            <div class="color-sample" style="background: var(--primary-color);">Primary</div>
+            <div class="color-sample" style="background: var(--secondary-color);">Secondary</div>
+            <div class="color-sample" style="background: var(--accent-color);">Accent</div>
+            <div class="color-sample" style="background: var(--success-color);">Success</div>
+            <div class="color-sample" style="background: var(--warning-color);">Warning</div>
+            <div class="color-sample" style="background: var(--danger-color);">Danger</div>
+        </div>
+
+        <!-- Typography -->
+        <div class="test-section">
+            <h2>Typography</h2>
+            <h1>Heading 1</h1>
+            <h2>Heading 2</h2>
+            <h3>Heading 3</h3>
+            <p>Regular paragraph text</p>
+            <p class="text-light">Light text</p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="test-section">
+            <h2>Buttons</h2>
+            <button class="btn btn-primary">Primary Button</button>
+            <button class="btn btn-outline-primary">Outline Button</button>
+        </div>
+
+        <!-- Cards -->
+        <div class="test-section">
+            <h2>Cards</h2>
+            <div class="card">
+                <h3>Basic Card</h3>
+                <p>Card content goes here</p>
+            </div>
+
+            <div class="flight-card">
+                <div class="flight-header">
+                    <h3>Flight Card</h3>
+                    <div class="price-tag">₹5,999</div>
+                </div>
+                <div class="route-info">
+                    <div>Delhi</div>
+                    <div class="route-line"></div>
+                    <div>Mumbai</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms -->
+        <div class="test-section">
+            <h2>Form Elements</h2>
+            <div class="form-group">
+                <label>Input Label</label>
+                <input type="text" class="form-control" placeholder="Enter text" />
+            </div>
+            <div class="form-group">
+                <label>Select</label>
+                <select class="form-control">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Status Badges -->
+        <div class="test-section">
+            <h2>Status Badges</h2>
+            <span class="status-badge status-available">Available</span>
+            <span class="status-badge status-limited">Limited</span>
+            <span class="status-badge status-full">Full</span>
+        </div>
+
+        <!-- Icons -->
+        <div class="test-section">
+            <h2>Material Icons</h2>
+            <span class="material-symbols-outlined">flight</span>
+            <span class="material-symbols-outlined">schedule</span>
+            <span class="material-symbols-outlined">person</span>
+        </div>
+    </div>
+
+    <script>
+        // Test if styles are loaded
+        window.onload = function() {
+            var styles = document.styleSheets;
+            console.log('Loaded stylesheets:', styles.length);
+            
+            // Test CSS variables
+            var root = document.documentElement;
+            var style = getComputedStyle(root);
+            console.log('Primary color:', style.getPropertyValue('--primary-color'));
+            console.log('Secondary color:', style.getPropertyValue('--secondary-color'));
+        }
+    </script>
+</body>
+</html>
